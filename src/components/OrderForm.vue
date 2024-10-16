@@ -52,6 +52,8 @@
 </template>
 
 <script>
+const orderServiceUrl = process.env.VUE_APP_ORDER_SERVICE_URL;
+const productServiceUrl = process.env.VUE_APP_PRODUCT_SERVICE_URL;
 export default {
   data() {
     return {
@@ -71,7 +73,7 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const response = await fetch('http://localhost:3030/products');
+        const response = await fetch(productServiceUrl);
         if (response.ok) {
           this.products = await response.json();
         } else {
@@ -89,7 +91,7 @@ export default {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/orders', {
+        const response = await fetch(orderServiceUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
